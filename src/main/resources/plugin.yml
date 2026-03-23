@@ -1,0 +1,9 @@
+name: ArisAdder
+version: 1.0
+main: me.vennlmao.arisadder.ArisAdder
+api-version: 1.20
+author: VennLMAO
+folia-supported: true
+commands:
+  arisadder:
+    aliases: [ia, arisai]
