@@ -18,7 +18,9 @@ public class ArisAdder extends JavaPlugin {
         if (!contents.exists()) contents.mkdirs();
         itemLoader = new ItemLoader();
         reloadPlugin();
-        getCommand("arisadder").setExecutor(new AdminCommand());
+        AdminCommand adminCmd = new AdminCommand();
+        getCommand("arisadder").setExecutor(adminCmd);
+        getCommand("arisadder").setTabCompleter(adminCmd);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
     }
 
@@ -29,4 +31,4 @@ public class ArisAdder extends JavaPlugin {
 
     public static ArisAdder getInstance() { return instance; }
     public ItemLoader getItemLoader() { return itemLoader; }
-}
+                                    }
