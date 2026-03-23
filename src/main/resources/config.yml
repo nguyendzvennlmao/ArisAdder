@@ -1,0 +1,9 @@
+resource-pack:
+  enabled: true
+  url: "https://raw.githubusercontent.com/VennLMAO/ArisResource/main/pack.zip"
+  hash: ""
+  force-download: true
+messages:
+  prefix: "§e[ArisAdder] §f"
+  no-permission: "§cBan khong co quyen!"
+  reload: "§aDa nap lai cau hinh thanh cong!"
