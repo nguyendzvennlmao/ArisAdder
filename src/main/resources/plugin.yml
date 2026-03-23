@@ -6,4 +6,5 @@ author: VennLMAO
 folia-supported: true
 commands:
   arisadder:
-    aliases: [ia, arisai]
+    aliases: [ia]
+    permission: arisadder.admin
