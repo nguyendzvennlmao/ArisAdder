@@ -21,24 +21,19 @@ public class ItemLoader {
         for (File sub : folders) {
             File configDir = new File(sub, "configs");
             if (!configDir.exists()) continue;
-
             File[] yamls = configDir.listFiles((dir, name) -> name.endsWith(".yml"));
             if (yamls == null) continue;
-
             for (File f : yamls) {
                 YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
                 ConfigurationSection s = c.getConfigurationSection("items");
                 if (s == null) continue;
-
                 for (String key : s.getKeys(false)) {
-                    ConfigurationSection itemSec = s.getConfigurationSection(key);
-                    if (itemSec == null) continue;
-                    
-                    String matStr = itemSec.getString("resource.material", "PAPER").toUpperCase();
-                    Material m = Material.getMaterial(matStr);
-                    int id = itemSec.getInt("resource.model_id", 0);
-                    String name = itemSec.getString("display_name", key);
-
+                    ConfigurationSection sec = s.getConfigurationSection(key);
+                    if (sec == null) continue;
+                    String mat = sec.getString("resource.material", "PAPER").toUpperCase();
+                    Material m = Material.getMaterial(mat);
+                    int id = sec.getInt("resource.model_id", 0);
+                    String name = sec.getString("display_name", key);
                     ItemStack is = new ItemStack(m != null ? m : Material.PAPER);
                     ItemMeta im = is.getItemMeta();
                     if (im != null) {
@@ -52,6 +47,5 @@ public class ItemLoader {
             }
         }
     }
-
     public Map<String, ItemStack> getLoadedItems() { return items; }
-                }
+}
