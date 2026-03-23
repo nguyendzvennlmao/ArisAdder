@@ -9,8 +9,6 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         String url = ArisAdder.getInstance().getConfig().getString("resource-pack.url", "");
         String hash = ArisAdder.getInstance().getConfig().getString("resource-pack.hash", "");
-        if (!url.isEmpty()) {
-            e.getPlayer().setResourcePack(url, hash.toLowerCase());
-        }
+        if (!url.isEmpty()) e.getPlayer().setResourcePack(url, hash.toLowerCase());
     }
 }
