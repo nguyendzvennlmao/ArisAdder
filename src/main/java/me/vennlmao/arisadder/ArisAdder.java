@@ -2,7 +2,7 @@ package me.vennlmao.arisadder;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
-import java.io.*;
+import java.io.File;
 
 public class ArisAdder extends JavaPlugin {
     private static ArisAdder instance;
@@ -14,29 +14,17 @@ public class ArisAdder extends JavaPlugin {
         instance = this;
         ITEM_ID_KEY = new NamespacedKey(this, "aris_id");
         saveDefaultConfig();
-        createFolders();
+        File contents = new File(getDataFolder(), "contents");
+        if (!contents.exists()) contents.mkdirs();
         itemLoader = new ItemLoader();
         reloadPlugin();
         getCommand("arisadder").setExecutor(new AdminCommand());
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
     }
 
-    private void createFolders() {
-        File c = new File(getDataFolder(), "configs");
-        File r = new File(getDataFolder(), "resourcepack/assets");
-        if (!c.exists()) c.mkdirs();
-        if (!r.exists()) r.mkdirs();
-        File m = new File(getDataFolder(), "resourcepack/pack.mcmeta");
-        if (!m.exists()) {
-            try (FileWriter w = new FileWriter(m)) {
-                w.write("{\"pack\":{\"pack_format\":15,\"description\":\"Aris Network Pack\"}}");
-            } catch (IOException e) { e.printStackTrace(); }
-        }
-    }
-
     public void reloadPlugin() {
         reloadConfig();
-        itemLoader.loadAll(new File(getDataFolder(), "configs"));
+        itemLoader.loadAll(new File(getDataFolder(), "contents"));
     }
 
     public static ArisAdder getInstance() { return instance; }
