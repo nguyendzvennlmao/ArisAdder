@@ -1,10 +1,3 @@
 resource-pack:
-  enabled: true
   url: ""
   hash: ""
-  force-download: true
-messages:
-  prefix: "§e[ArisAdder] §f"
-  no-permission: "§cBan khong co quyen!"
-  reload: "§aĐã reload thành công!"
-  pack-success: "§aDa nen pack.zip va cap nhat SHA-1 thanh cong!"
