@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class ItemLoader {
     private final Map<String, ItemStack> items = new HashMap<>();
-
     public void loadAll(File folder) {
         items.clear();
         if (!folder.exists() || folder.listFiles() == null) return;
@@ -21,22 +20,22 @@ public class ItemLoader {
             YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
             ConfigurationSection s = c.getConfigurationSection("items");
             if (s == null) continue;
-            for (String key : s.getKeys(false)) {
-                String p = "items." + key + ".";
+            for (String k : s.getKeys(false)) {
+                String p = "items." + k + ".";
                 Material m = Material.valueOf(c.getString(p + "resource.material", "PAPER").toUpperCase());
                 int id = c.getInt(p + "resource.model_id", 0);
-                String n = c.getString(p + "display_name", key);
+                String n = c.getString(p + "display_name", k);
                 ItemStack is = new ItemStack(m);
                 ItemMeta im = is.getItemMeta();
                 if (im != null) {
                     im.setDisplayName(n.replace("&", "§"));
                     if (id != 0) im.setCustomModelData(id);
-                    im.getPersistentDataContainer().set(ArisAdder.ITEM_ID_KEY, PersistentDataType.STRING, key);
+                    im.getPersistentDataContainer().set(ArisAdder.ITEM_ID_KEY, PersistentDataType.STRING, k);
                     is.setItemMeta(im);
                 }
-                items.put(key, is);
+                items.put(k, is);
             }
         }
     }
     public Map<String, ItemStack> getLoadedItems() { return items; }
-                  }
+                        }
